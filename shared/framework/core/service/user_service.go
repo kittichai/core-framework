@@ -27,18 +27,26 @@ func NewUserServiceImpl(userRepository repository.UserRepository) *UserServiceIm
 
 func (s *UserServiceImpl) Create(ctx context.Context, user *model.User) error {
 	repo_model_user := &repo_model.User{
-		ID:    user.ID,
-		Email: user.Email,
-		Name:  user.Name,
+		ID:           user.ID,
+		Email:        user.Email,
+		FirstName:    user.FirstName,
+		LastName:     user.LastName,
+		UserName:     user.UserName,
+		PasswordHash: user.PasswordHash,
+		CreatedAt:    user.CreatedAt,
 	}
 	return s.userRepository.Create(ctx, repo_model_user)
 }
 
 func (s *UserServiceImpl) Update(ctx context.Context, user *model.User) error {
 	repo_model_user := &repo_model.User{
-		ID:    user.ID,
-		Email: user.Email,
-		Name:  user.Name,
+		ID:           user.ID,
+		Email:        user.Email,
+		FirstName:    user.FirstName,
+		LastName:     user.LastName,
+		UserName:     user.UserName,
+		PasswordHash: user.PasswordHash,
+		CreatedAt:    user.CreatedAt,
 	}
 	return s.userRepository.Update(ctx, repo_model_user)
 }
@@ -51,9 +59,12 @@ func (s *UserServiceImpl) FindByEmail(ctx context.Context, email string) (*model
 	}
 
 	user := &model.User{
-		ID:    user_repo.ID,
-		Email: user_repo.Email,
-		Name:  user_repo.Name,
+		ID:        user_repo.ID,
+		Email:     user_repo.Email,
+		FirstName: user_repo.FirstName,
+		LastName:  user_repo.LastName,
+		UserName:  user_repo.UserName,
+		CreatedAt: user_repo.CreatedAt,
 	}
 
 	return user, nil
@@ -67,9 +78,12 @@ func (s *UserServiceImpl) FindByUsername(ctx context.Context, username string) (
 	}
 
 	user := &model.User{
-		ID:    user_repo.ID,
-		Email: user_repo.Email,
-		Name:  user_repo.Name,
+		ID:        user_repo.ID,
+		Email:     user_repo.Email,
+		FirstName: user_repo.FirstName,
+		LastName:  user_repo.LastName,
+		UserName:  user_repo.UserName,
+		CreatedAt: user_repo.CreatedAt,
 	}
 
 	return user, nil

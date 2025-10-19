@@ -64,8 +64,8 @@ github.com/hailocab/go-hostpool v0.0.0-20160125115350-e80d13ce29ed h1:5upAirOpQc
 github.com/hailocab/go-hostpool v0.0.0-20160125115350-e80d13ce29ed/go.mod h1:tMWxXQ9wFIaZeTI9F+hmhFiGpFmhOHzyShyFUhRm0H4=
 github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI2bnpBCr8=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
-github.com/kittichai/core-model v0.1.0-alpha h1:UCANhRzJptvbJkC2BBza3hWul616sBhCoG/+kgk2uuw=
-github.com/kittichai/core-model v0.1.0-alpha/go.mod h1:nDiu52NfHh2A/GZgCCsx5/fPFdKFQvQX/i1oB0AeQZ8=
+github.com/kittichai/core-model v0.1.2-alpha h1:5x1A3TpHjwbd53haFyW08E9p8MS3UzMAQvT9UqivgB4=
+github.com/kittichai/core-model v0.1.2-alpha/go.mod h1:nDiu52NfHh2A/GZgCCsx5/fPFdKFQvQX/i1oB0AeQZ8=
 github.com/klauspost/compress v1.17.9 h1:6KIumPrER1LHsvBVuDa0r5xaG0Es51mhhB9BQB2qeMA=
 github.com/klauspost/compress v1.17.9/go.mod h1:Di0epgTjJY877eYKx5yC51cX2A2Vl2ibi7bDH9ttBbw=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=

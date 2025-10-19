@@ -2,8 +2,6 @@ module github.com/kittichai/core-framework
 
 go 1.24.2
 
-
-
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-sql-driver/mysql v1.9.3
@@ -11,6 +9,7 @@ require (
 	github.com/gofiber/contrib/jwt v1.1.2
 	github.com/gofiber/fiber/v2 v2.52.9
 	github.com/google/uuid v1.6.0
+	github.com/kittichai/core-model v0.1.2-alpha
 	github.com/lib/pq v1.10.9
 	github.com/rabbitmq/amqp091-go v1.10.0
 	github.com/redis/go-redis/v9 v9.14.1
@@ -21,6 +20,9 @@ require (
 	go.mongodb.org/mongo-driver v1.17.4
 	go.opentelemetry.io/otel v1.38.0
 	go.opentelemetry.io/otel/trace v1.38.0
+)
+
+require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/MicahParks/keyfunc/v2 v2.1.0 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
@@ -79,5 +81,4 @@ require (
 	google.golang.org/grpc v1.71.1 // indirect
 	google.golang.org/protobuf v1.36.5 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
-    github.com/kittichai/core-model v0.1.0-alpha
 )

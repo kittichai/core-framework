@@ -27,13 +27,15 @@ func NewUserRepository(db *postgres.PostgresDB) *UserRepositoryImpl {
 func (r *UserRepositoryImpl) Create(ctx context.Context, user *model.User) error {
 	// implement creation using r.db, e.g. r.db.Client.Create(user) or appropriate DB call
 	query := `
-		INSERT INTO users (id, email, name, password_hash, created_at)
+		INSERT INTO users (id, firstname, lastname, email, username, password_hash, created_at)
 		VALUES ($1, $2, $3, $4, $5)`
 
 	_, err := r.db.ExecContext(ctx, query,
 		user.ID,
+		user.FirstName,
+		user.LastName,
 		user.Email,
-		user.Name,
+		user.UserName,
 		user.PasswordHash,
 		user.CreatedAt)
 
@@ -52,7 +54,7 @@ func (r *UserRepositoryImpl) FindByEmail(ctx context.Context, email string) (*mo
 	var schema model.User
 
 	row := r.db.QueryRowContext(ctx, query, email)
-	err := row.Scan(&schema.ID, &schema.Email, &schema.Name)
+	err := row.Scan(&schema.ID, &schema.Email, &schema.FirstName, &schema.LastName, &schema.UserName)
 
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, nil // ไม่พบผู้ใช้
@@ -70,7 +72,7 @@ func (r *UserRepositoryImpl) FindByUsername(ctx context.Context, username string
 	var schema model.User
 
 	row := r.db.QueryRowContext(ctx, query, username)
-	err := row.Scan(&schema.ID, &schema.Email, &schema.Name)
+	err := row.Scan(&schema.ID, &schema.Email, &schema.FirstName, &schema.LastName, &schema.UserName)
 
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, nil // ไม่พบผู้ใช้
