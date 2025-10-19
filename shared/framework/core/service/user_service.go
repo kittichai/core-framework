@@ -3,7 +3,9 @@ package service
 import (
 	"context"
 
+	repository "github.com/kittichai/core-framework/shared/framework/infrastructure/persistence/repository"
 	model "github.com/kittichai/core-model/shared/model/core/domain"
+	repo_model "github.com/kittichai/core-model/shared/model/infrastructure/persistence/model"
 )
 
 type UserService interface {
@@ -14,26 +16,36 @@ type UserService interface {
 }
 
 type UserServiceImpl struct {
-	UserRepository UserService
+	userRepository repository.UserRepository
 }
 
-func NewUserServiceImpl(userRepository UserService) UserService {
+func NewUserServiceImpl(userRepository repository.UserRepository) UserService {
 	return &UserServiceImpl{
-		UserRepository: userRepository,
+		userRepository: userRepository,
 	}
 }
 
 func (s *UserServiceImpl) Create(ctx context.Context, user *model.User) error {
-	return s.UserRepository.Create(ctx, user)
+	repo_model_user := &repo_model.User{
+		ID:    user.ID,
+		Email: user.Email,
+		Name:  user.Name,
+	}
+	return s.userRepository.Create(ctx, repo_model_user)
 }
 
 func (s *UserServiceImpl) Update(ctx context.Context, user *model.User) error {
-	return s.UserRepository.Update(ctx, user)
+	repo_model_user := &repo_model.User{
+		ID:    user.ID,
+		Email: user.Email,
+		Name:  user.Name,
+	}
+	return s.userRepository.Update(ctx, repo_model_user)
 }
 
 func (s *UserServiceImpl) FindByEmail(ctx context.Context, email string) (*model.User, error) {
 
-	user_repo, err := s.UserRepository.FindByEmail(ctx, email)
+	user_repo, err := s.userRepository.FindByEmail(ctx, email)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +61,7 @@ func (s *UserServiceImpl) FindByEmail(ctx context.Context, email string) (*model
 
 func (s *UserServiceImpl) FindByUsername(ctx context.Context, username string) (*model.User, error) {
 
-	user_repo, err := s.UserRepository.FindByUsername(ctx, username)
+	user_repo, err := s.userRepository.FindByUsername(ctx, username)
 	if err != nil {
 		return nil, err
 	}
