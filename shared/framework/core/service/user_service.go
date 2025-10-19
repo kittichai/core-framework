@@ -17,6 +17,12 @@ type UserServiceImpl struct {
 	UserRepository UserService
 }
 
+func NewUserServiceImpl(userRepository UserService) UserService {
+	return &UserServiceImpl{
+		UserRepository: userRepository,
+	}
+}
+
 func (s *UserServiceImpl) Create(ctx context.Context, user *model.User) error {
 	return s.UserRepository.Create(ctx, user)
 }
