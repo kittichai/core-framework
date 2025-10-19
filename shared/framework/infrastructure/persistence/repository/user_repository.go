@@ -14,7 +14,6 @@ type UserRepository interface {
 	Update(ctx context.Context, user *model.User) error
 	FindByEmail(ctx context.Context, email string) (*model.User, error)
 	FindByUsername(ctx context.Context, username string) (*model.User, error)
-	CountByUsername(ctx context.Context, username string) (int64, error)
 }
 
 type UserRepositoryImpl struct {
