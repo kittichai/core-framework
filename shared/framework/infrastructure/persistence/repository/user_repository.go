@@ -28,7 +28,7 @@ func (r *UserRepositoryImpl) Create(ctx context.Context, user *model.User) error
 	// implement creation using r.db, e.g. r.db.Client.Create(user) or appropriate DB call
 	query := `
 		INSERT INTO users (id, firstname, lastname, email, username, password_hash, created_at)
-		VALUES ($1, $2, $3, $4, $5)`
+		VALUES ($1, $2, $3, $4, $5, $6, $7)`
 
 	_, err := r.db.ExecContext(ctx, query,
 		user.ID,
