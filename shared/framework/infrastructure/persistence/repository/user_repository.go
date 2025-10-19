@@ -50,7 +50,7 @@ func (r *UserRepositoryImpl) Update(ctx context.Context, user *model.User) error
 	return nil
 }
 func (r *UserRepositoryImpl) FindByEmail(ctx context.Context, email string) (*model.User, error) {
-	query := "SELECT id, email, name FROM users WHERE email = $1"
+	query := "SELECT id, firstname, lastname, email, username FROM users WHERE email = $1"
 	var schema model.User
 
 	row := r.db.QueryRowContext(ctx, query, email)
@@ -68,7 +68,7 @@ func (r *UserRepositoryImpl) FindByEmail(ctx context.Context, email string) (*mo
 }
 
 func (r *UserRepositoryImpl) FindByUsername(ctx context.Context, username string) (*model.User, error) {
-	query := "SELECT id, email, name FROM users WHERE username = $1"
+	query := "SELECT id, firstname, lastname, email, username FROM users WHERE username = $1"
 	var schema model.User
 
 	row := r.db.QueryRowContext(ctx, query, username)
