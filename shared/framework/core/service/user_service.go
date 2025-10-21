@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 
 	repository "github.com/kittichai/core-framework/shared/framework/infrastructure/persistence/repository"
 	model "github.com/kittichai/core-model/shared/model/core/domain"
@@ -31,6 +32,7 @@ func (s *UserServiceImpl) Create(ctx context.Context, user *model.User) error {
 		Email:        user.Email,
 		FirstName:    user.FirstName,
 		LastName:     user.LastName,
+		Phone:        user.Phone,
 		UserName:     user.UserName,
 		PasswordHash: user.PasswordHash,
 		CreatedAt:    user.CreatedAt,
@@ -58,13 +60,21 @@ func (s *UserServiceImpl) FindByEmail(ctx context.Context, email string) (*model
 		return nil, err
 	}
 
+	if user_repo == nil {
+		return nil, fmt.Errorf("user not found")
+	}
+
 	user := &model.User{
-		ID:        user_repo.ID,
-		Email:     user_repo.Email,
-		FirstName: user_repo.FirstName,
-		LastName:  user_repo.LastName,
-		UserName:  user_repo.UserName,
-		CreatedAt: user_repo.CreatedAt,
+		ID:            user_repo.ID,
+		Email:         user_repo.Email,
+		FirstName:     user_repo.FirstName,
+		LastName:      user_repo.LastName,
+		Phone:         user_repo.Phone,
+		UserName:      user_repo.UserName,
+		IsActive:      user_repo.IsActive,
+		EmailVerified: user_repo.EmailVerified,
+		CreatedAt:     user_repo.CreatedAt,
+		UpdatedAt:     user_repo.UpdatedAt,
 	}
 
 	return user, nil
@@ -75,6 +85,10 @@ func (s *UserServiceImpl) FindByUsername(ctx context.Context, username string) (
 	user_repo, err := s.userRepository.FindByUsername(ctx, username)
 	if err != nil {
 		return nil, err
+	}
+
+	if user_repo == nil {
+		return nil, fmt.Errorf("user not found")
 	}
 
 	user := &model.User{

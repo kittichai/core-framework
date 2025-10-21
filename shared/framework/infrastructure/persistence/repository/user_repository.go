@@ -27,7 +27,7 @@ func NewUserRepository(db *postgres.PostgresDB) *UserRepositoryImpl {
 func (r *UserRepositoryImpl) Create(ctx context.Context, user *model.User) error {
 	// implement creation using r.db, e.g. r.db.Client.Create(user) or appropriate DB call
 	query := `
-		INSERT INTO users (id, firstname, lastname, email, username, password_hash, created_at)
+		INSERT INTO users (id, first_name, last_name, email, phone , username, password_hash)
 		VALUES ($1, $2, $3, $4, $5, $6, $7)`
 
 	_, err := r.db.ExecContext(ctx, query,
@@ -35,9 +35,10 @@ func (r *UserRepositoryImpl) Create(ctx context.Context, user *model.User) error
 		user.FirstName,
 		user.LastName,
 		user.Email,
+		user.Phone,
 		user.UserName,
 		user.PasswordHash,
-		user.CreatedAt)
+	)
 
 	if err != nil {
 		return err
@@ -50,14 +51,19 @@ func (r *UserRepositoryImpl) Update(ctx context.Context, user *model.User) error
 	return nil
 }
 func (r *UserRepositoryImpl) FindByEmail(ctx context.Context, email string) (*model.User, error) {
-	query := "SELECT id, firstname, lastname, email, username FROM users WHERE email = $1"
+	query := `SELECT id, first_name, last_name, username, email, phone, is_active, email_verified, created_at, updated_at 
+        FROM users 
+        WHERE email = $1`
+
 	var schema model.User
 
 	row := r.db.QueryRowContext(ctx, query, email)
-	err := row.Scan(&schema.ID, &schema.Email, &schema.FirstName, &schema.LastName, &schema.UserName)
+	err := row.Scan(
+		&schema.ID, &schema.FirstName, &schema.LastName, &schema.UserName, &schema.Email, &schema.Phone,
+		&schema.IsActive, &schema.EmailVerified, &schema.CreatedAt, &schema.UpdatedAt)
 
 	if errors.Is(err, sql.ErrNoRows) {
-		return nil, nil // ไม่พบผู้ใช้
+		return nil, nil
 	}
 	if err != nil {
 		return nil, err
@@ -68,11 +74,11 @@ func (r *UserRepositoryImpl) FindByEmail(ctx context.Context, email string) (*mo
 }
 
 func (r *UserRepositoryImpl) FindByUsername(ctx context.Context, username string) (*model.User, error) {
-	query := "SELECT id, firstname, lastname, email, username FROM users WHERE username = $1"
+	query := "SELECT id, first_name, last_name, email , phone , username FROM users WHERE username = $1"
 	var schema model.User
 
 	row := r.db.QueryRowContext(ctx, query, username)
-	err := row.Scan(&schema.ID, &schema.Email, &schema.FirstName, &schema.LastName, &schema.UserName)
+	err := row.Scan(&schema.ID, &schema.Email, &schema.Phone, &schema.FirstName, &schema.LastName, &schema.UserName)
 
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, nil // ไม่พบผู้ใช้

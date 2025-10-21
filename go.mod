@@ -9,7 +9,7 @@ require (
 	github.com/gofiber/contrib/jwt v1.1.2
 	github.com/gofiber/fiber/v2 v2.52.9
 	github.com/google/uuid v1.6.0
-	github.com/kittichai/core-model v0.1.2-alpha
+	github.com/kittichai/core-model v0.0.0-00010101000000-000000000000
 	github.com/lib/pq v1.10.9
 	github.com/rabbitmq/amqp091-go v1.10.0
 	github.com/redis/go-redis/v9 v9.14.1
@@ -82,3 +82,6 @@ require (
 	google.golang.org/protobuf v1.36.5 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 )
+
+//github.com/kittichai/core-model => github.com/kittichai/core-model v1.0.0-alpha
+replace github.com/kittichai/core-model => C:/Users/Tafu/OneDrive/เดสก์ท็อป/go-workshop/go-microservice/core-model

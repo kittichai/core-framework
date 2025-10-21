@@ -1,0 +1,36 @@
+
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binary, generated with `go test -c`
+*.test
+
+# Compiled Go packages
+*.o
+*.a
+
+# Dependencies
+vendor/
+
+# Log files
+*.log
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.swp
+*.bak
+*~
+
+# Build output
+bin/
+pkg/
+
+# Environment variables and sensitive data
+.env
+
+#go sum 
+go.sum
